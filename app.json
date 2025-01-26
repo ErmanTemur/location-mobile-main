@@ -1,0 +1,60 @@
+{
+  "expo": {
+    "name": "location",
+    "slug": "location",
+    "version": "1.0.34",
+    "orientation": "portrait",
+    "icon": "./assets/icon.jpg",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.jpg",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.location.app",
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "location"
+        ],
+        "NSLocationWhenInUseUsageDescription": "Uygulama kullanılırken konumunuzu izlemek için izin gereklidir. Bu, konum güncellemeleri almanızı ve ailenizin sizi kontrol etmesini sağlar.",
+        "NSLocationAlwaysUsageDescription": "Uygulama arka planda çalışırken konumunuzu izlemek için izin gereklidir. Bu, konum güncellemeleri almanızı ve ailenizin sizi kontrol etmesini sağlar.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Uygulama hem ön planda hem de arka planda çalışırken konumunuzu izlemek için izin gereklidir. Bu, konum güncellemeleri almanızı ve ailenizin sizi kontrol etmesini sağlar.",
+        "NSUserTrackingUsageDescription": "Uygulama, Bu uygulama, size daha iyi bir deneyim sunmak için diğer şirketlerin uygulamalarındaki ve web sitelerindeki etkinliklerinizi izlemek istiyor.",
+        "NSUserNotificationUsageDescription": "Uygulama, size önemli bildirimler göndermek için izninize ihtiyaç duyar."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.jpg",
+        "backgroundColor": "#ffffff"
+      },
+      "googleServicesFile": "./google-services.json",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION",
+        "com.android.vending.BILLING",
+        "com.google.android.c2dm.permission.RECEIVE",
+        "com.google.android.gms.permission.AD_ID"
+      ],
+      "package": "com.location.app",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCXuHxTuoisAe_bkvGfOl0Rx42wBMzSvR4"
+        }
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.jpg"
+    },
+    "extra": {
+      "eas": {
+      }
+    },
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}
