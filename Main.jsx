@@ -154,21 +154,13 @@ export default function Main() {
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
         <Stack.Group>
-        <Stack.Screen
-              name="Onboarding"
-              component={Onboarding}
-              options={{ headerShown: false }}
-            />
+
           <Stack.Screen
             name="BottomTabNavigation"
             component={BottomTabNavigation}
             options={{ headerShown: false }}
           />
-          <Stack.Screen
-            name="PermissionsPage"
-            component={PermissionsPage}
-            options={{ headerShown: false }}
-          />
+
           <Stack.Screen
             name="Home"
             component={Home}

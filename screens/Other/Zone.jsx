@@ -72,12 +72,11 @@ const Zone = ({ navigation }) => {
         ]}
       >
         <AppBar
-          top={20}
+          top={0}
           left={20}
           right={20}
-          color={COLORS.lightBack}
+          color={COLORS.white}
           onPress={() => navigation.goBack()}
-          title={t("modal.zoneAdd")}
           onDeletePress={handleDeleteZone}
           showDeleteIcon={isZoneSelected}
           onCloseDeleteIcon={handleCloseDeleteIcon}
@@ -86,43 +85,52 @@ const Zone = ({ navigation }) => {
       <View
         style={[
           homeStyles.flexSpace,
-          { paddingHorizontal: 25, paddingVertical: 10, paddingBottom: 25 },
+          { paddingHorizontal: 20, paddingVertical: 10, paddingBottom: 25,borderBottomColor:"black",borderBottomWidth:1 },
         ]}
       >
-        <ReusableText
+         <ReusableText
           text={t("modal.zoneMy")}
           family={"bold"}
-          size={TEXT.small}
+          size={TEXT.large}
           color={COLORS.lightBlack}
         />
         <TouchableOpacity style={homeStyles.box} onPress={toggleZoneModal}>
-          <View style={homeStyles.boxIcon2}>
-            <MaterialIcons name="add" size={20} color="black" />
-          </View>
-          <View style={{ paddingHorizontal: 10 }}>
-            <ReusableText
+        <MaterialIcons name="add" size={26} color="black" />
+
+          <ReusableText
               text={t("modal.zoneAdd")}
               family={"medium"}
-              size={TEXT.xSmall}
+              size={TEXT.small}
               color={COLORS.black}
             />
-          </View>
         </TouchableOpacity>
+        
       </View>
-      <View style={{ paddingHorizontal: 25 }}>
-        <FlatList
-          data={zones}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <ZoneCard
-              item={item}
-              onLongPress={() => handleLongPress(item._id)}
-              selected={selectedZoneId === item._id}
+      <View style={{ paddingHorizontal: 20 }}>
+        {zones && zones.length > 0 ? (
+          <FlatList
+            data={zones}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item }) => (
+              <ZoneCard
+                item={item}
+                onLongPress={() => handleLongPress(item._id)}
+                selected={selectedZoneId === item._id}
+              />
+            )}
+            keyExtractor={(item) => item._id}
+            contentContainerStyle={{ gap: SIZES.small }}
+          />
+        ) : (
+          <View style={{ alignItems: 'center', marginTop: 20 }}>
+            <ReusableText
+              text={t("Henüz Bir Bölge Eklemediniz...")}
+              family={"regular"}
+              size={TEXT.small}
+              color={COLORS.description}
             />
-          )}
-          keyExtractor={(item) => item._id}
-          contentContainerStyle={{ gap: SIZES.small }}
-        />
+          </View>
+        )}
       </View>
       <View style={homeStyles.footer3}>
         <ReusableText

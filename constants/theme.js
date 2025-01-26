@@ -2,7 +2,7 @@ import { Dimensions } from 'react-native'
 const { height, width } = Dimensions.get('window');
 
 const COLORS = {
-  primary: "#004ffd",
+  primary: "#a535f0",
   transparent: "transparent",
   blue: "#4267B2",
   red: "#D80000",
@@ -22,7 +22,8 @@ const COLORS = {
   lightInput: "#F5F5F5",
   lightBack: "#E8E8E8",
   lightBorder: "#DDDDDD",
-  opacity:"rgba(0, 0, 0, 0.7)"
+  purple:"#b95bf7",
+  opacity:"rgba(165, 53, 240, 0.3)"
 };
 
 

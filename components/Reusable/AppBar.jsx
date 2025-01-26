@@ -90,10 +90,10 @@ const styles = StyleSheet.create({
     backgroundColor: color,
     width: 40,
     height: 40,
-    borderRadius: 20,
+    borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: showDeleteIcon ? COLORS.white : COLORS.lightBlack,
   }),
   box1: (color1) => ({

@@ -14,21 +14,20 @@ const ZoneCard = ({ item, onLongPress, selected }) => {
     <TouchableOpacity
       style={[
         homeStyles.logsCard,
-        { backgroundColor: selected ? COLORS.red : COLORS.lightInput },
       ]}
       onLongPress={onLongPress}
     >
       <ReusableText
         text={item.title}
         family={"bold"}
-        size={TEXT.xSmall}
-        color={selected ? COLORS.white : COLORS.lightBlack}
+        size={TEXT.medium}
+        color={selected ? COLORS.white : COLORS.black}
       />
       <ReusableText
         text={formattedDate || t("payment.now")}
         family={"regular"}
-        size={TEXT.xxSmall}
-        color={selected ? COLORS.white : COLORS.lightBlack}
+        size={TEXT.small}
+        color={selected ? COLORS.white : COLORS.black}
       />
     </TouchableOpacity>
   );

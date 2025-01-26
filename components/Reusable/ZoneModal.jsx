@@ -100,111 +100,126 @@ const ZoneModal = ({ isVisible, onClose, onSuccess }) => {
       onBackdropPress={onClose}
       backdropOpacity={0.7}
       style={styles.modal}
+      animationIn="slideInUp"
+      animationOut="slideOutDown"
+      animationInTiming={500}
+      animationOutTiming={500}
+      swipeDirection={['down']}
+      onSwipeComplete={onClose}
+      swipeThreshold={50}
+      propagateSwipe={true}
     >
       <KeyboardAvoidingView
-        style={styles.modalView}
+        style={styles.modalContainer}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
       >
-        <View style={styles.text}>
-          <ReusableText
-            text={t("modal.zoneAdd")}
-            family={"medium"}
-            size={TEXT.medium}
-            color={COLORS.black}
-          />
-          <ReusableText
-            text={t("modal.zoneModalDesc")}
-            family={"regular"}
-            size={TEXT.xSmall}
-            color={COLORS.description}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <ReusableText
-            text={t("modal.zoneModalName")}
-            family={"medium"}
-            size={TEXT.small}
-            color={COLORS.black}
-          />
-          <ReusableInput
-            label={t("modal.zoneModalName")}
-            theme={{ colors: { primary: "black" } }}
-            value={formik.values.title}
-            onChangeText={formik.handleChange("title")}
-            touched={formik.touched.title}
-            error={formik.errors.title}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <ReusableText
-            text={t("modal.zoneModalZone")}
-            family={"medium"}
-            size={TEXT.small}
-            color={COLORS.black}
-          />
-          {region ? (
-            <MapView
-              style={styles.map}
-              region={region}
-              onPress={handleMapPress}
-            >
-              {zone && (
-                <>
-                  <Marker coordinate={zone} title="Seçilen Konum" />
-                  <Circle
-                    center={zone}
-                    radius={formik.values.zoneRadius}
-                    strokeColor={COLORS.primary}
-                    fillColor="rgba(173, 255, 47, 0.3)"
-                  />
-                </>
-              )}
-            </MapView>
-          ) : (
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator size="large" color={COLORS.black} />
+        <View style={styles.modalContent}>
+          <View style={styles.modalView}>
+            <View style={styles.indicator} />
+            <View style={styles.text}>
               <ReusableText
-                text={t("modal.locationLoading")}
+                text={t("modal.zoneAdd")}
+                family={"medium"}
+                size={TEXT.medium}
+                color={COLORS.black}
+              />
+              <ReusableText
+                text={t("modal.zoneModalDesc")}
                 family={"regular"}
-                size={TEXT.small}
+                size={TEXT.xSmall}
                 color={COLORS.description}
               />
             </View>
-          )}
-        </View>
-        {zone && (
-          <View style={styles.sliderContainer}>
-            <ReusableText
-              text={`${t("modal.zoneDia")} ${formik.values.zoneRadius} ${t("modal.metre")}`}
-              family={"medium"}
-              size={TEXT.small}
-              color={COLORS.black}
+            <View style={styles.inputContainer}>
+              <ReusableText
+                text={t("modal.zoneModalName")}
+                family={"medium"}
+                size={TEXT.small}
+                color={COLORS.black}
+              />
+              <ReusableInput
+                label={t("modal.zoneModalName")}
+                theme={{ colors: { primary: "black" } }}
+                value={formik.values.title}
+                onChangeText={formik.handleChange("title")}
+                touched={formik.touched.title}
+                error={formik.errors.title}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <ReusableText
+                text={t("modal.zoneModalZone")}
+                family={"medium"}
+                size={TEXT.small}
+                color={COLORS.black}
+              />
+              {region ? (
+                <MapView
+                  style={styles.map}
+                  region={region}
+                  onPress={handleMapPress}
+                >
+                  {zone && (
+                    <>
+                      <Marker coordinate={zone} title="Seçilen Konum" />
+                      <Circle
+                        center={zone}
+                        radius={formik.values.zoneRadius}
+                        strokeColor="rgba(165, 53, 240, 0.5)"
+                        fillColor="rgba(165, 53, 240, 0.3)"
+                      />
+                    </>
+                  )}
+                </MapView>
+              ) : (
+                <View style={styles.loadingContainer}>
+                  <ActivityIndicator size="large" color={COLORS.black} />
+                  <ReusableText
+                    text={t("modal.locationLoading")}
+                    family={"regular"}
+                    size={TEXT.small}
+                    color={COLORS.description}
+                  />
+                </View>
+              )}
+            </View>
+            {zone && (
+              <View style={styles.sliderContainer}>
+                <ReusableText
+                  text={`${t("modal.zoneDia")} ${formik.values.zoneRadius} ${t("modal.metre")}`}
+                  family={"medium"}
+                  size={TEXT.small}
+                  color={COLORS.black}
+                />
+                <Slider
+                  style={styles.slider}
+                  minimumValue={20}
+                  maximumValue={500}
+                  step={10}
+                  value={formik.values.zoneRadius}
+                  onValueChange={(value) => formik.setFieldValue("zoneRadius", value)}
+                  minimumTrackTintColor={COLORS.primary}
+                  maximumTrackTintColor={COLORS.gray}
+                />
+              </View>
+            )}
+            <HeightSpacer height={40} />
+            <ReusableButton
+              btnText={t("modal.zoneModalButton")}
+              width={SIZES.width - 40}
+              height={45}
+              borderRadius={SIZES.small}
+              borderWidth={1}
+              backgroundColor={COLORS.primary}
+              textColor={COLORS.white}
+              textFontSize={TEXT.small}
+              textFontFamily={"medium"}
+              onPress={formik.handleSubmit}
             />
-            <Slider
-              style={styles.slider}
-              minimumValue={20}
-              maximumValue={500}
-              step={10}
-              value={formik.values.zoneRadius}
-              onValueChange={(value) => formik.setFieldValue("zoneRadius", value)}
-              minimumTrackTintColor={COLORS.black}
-              maximumTrackTintColor={COLORS.gray}
-            />
+            {Platform.OS === "ios" && <HeightSpacer height={25} />}
           </View>
-        )}
-        <HeightSpacer height={40} />
-        <ReusableButton
-          btnText={t("modal.zoneModalButton")}
-          width={SIZES.width - 80}
-          height={45}
-          borderRadius={SIZES.xSmall}
-          backgroundColor={COLORS.primary}
-          textColor={COLORS.black}
-          textFontSize={TEXT.small}
-          textFontFamily={"medium"}
-          onPress={formik.handleSubmit}
-        />
-        {Platform.OS === "ios" && <HeightSpacer height={25} />}
+        </View>
       </KeyboardAvoidingView>
       {status && <NoticeMessage status={status} message={message} />}
     </Modal>
@@ -214,15 +229,22 @@ const ZoneModal = ({ isVisible, onClose, onSuccess }) => {
 const styles = StyleSheet.create({
   modal: {
     margin: 0,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'flex-end',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  modalContent: {
+    maxHeight: '90%',
   },
   modalView: {
     backgroundColor: "white",
-    borderRadius: 10,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     padding: 20,
     alignItems: "center",
-    width: "90%",
+    width: "100%",
   },
   text: {
     marginBottom: 20,
@@ -245,6 +267,18 @@ const styles = StyleSheet.create({
   slider: {
     width: "100%",
     height: 40,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  indicator: {
+    height: 5,
+    backgroundColor: COLORS.gray,
+    borderRadius: 5,
+    width: "30%",
+    marginBottom: 10,
   },
 });
 
