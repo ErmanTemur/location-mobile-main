@@ -149,8 +149,25 @@ const PermissionsPage = () => {
     },
   ];
 
+  const Paginator = () => {
+    return (
+      <View style={styles.paginationContainer}>
+        {slides.map((_, index) => (
+          <View
+            key={index}
+            style={[
+              styles.dot,
+              { backgroundColor: index === stage - 1 ? COLORS.primary : COLORS.lightInput }
+            ]}
+          />
+        ))}
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={[homeStyles.container]}>
+      <Paginator />
       <FlatList
         ref={flatListRef}
         scrollEnabled={false}
@@ -161,15 +178,15 @@ const PermissionsPage = () => {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <Slides item={item} activeSlide={stage - 1} />}
       />
-      <View style={{ paddingBottom: 75 ,alignItems:"center" }}>
+      <View style={{ paddingBottom: 50 ,alignItems:"center" }}>
         <ReusableButton
           btnText={t("permissions.accept")}
-          width={SIZES.width - 80}
+          width={SIZES.width - 40}
           height={45}
-          borderRadius={SIZES.xSmall}
+          borderRadius={SIZES.medium}
           backgroundColor={COLORS.primary}
-          textColor={COLORS.black}
-          textFontSize={TEXT.small}
+          textColor={COLORS.white}
+          textFontSize={TEXT.medium}
           textFontFamily={"medium"}
           onPress={handleNextStage}
         />
@@ -218,6 +235,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: 20,
     padding: 20,
+  },
+  paginationContainer: {
+    flexDirection: 'row',
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 20,
+  },
+  dot: {
+    height: 12,
+    width: 12,
+    borderRadius: 4,
+    marginHorizontal: 4,
+    borderWidth:1
   },
 });
 

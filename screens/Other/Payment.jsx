@@ -15,7 +15,6 @@ import homeStyles from "../screens.style";
 import Countdown from "react-native-countdown-component";
 import { HeightSpacer } from "../../components";
 import PaymentCard from "../../components/Card/PaymentCard";
-import { useRevenueCatContext } from "../../context/SubscriptionCtx";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { createSubscription } from "../../redux/userActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,51 +28,11 @@ const Payment = ({ navigation }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const { t } = useTranslation();
 
-  const {
-    offerings,
-    entitlementInfo,
-    loading,
-    purchasePackage,
-    restorePurchases,
-  } = useRevenueCatContext();
-
-  const offeringData = offerings?.availablePackages.map((item) => ({
-    id: item.identifier,
-    name: item.product.title,
-    duration: item.product.subscriptionPeriod,
-    price: item.product.price,
-    currency: item.product.currencyCode,
-    billingCycle: item.packageType,
-  }));
-
-  useEffect(() => {
-    const calculateTimeLeft = () => {
-      const now = new Date();
-      const targetDate = entitlementInfo?.isActive
-        ? new Date(entitlementInfo.expirationDate)
-        : new Date(now.getFullYear(), now.getMonth(), 5);
-
-      if (!entitlementInfo?.isActive && now > targetDate) {
-        targetDate.setMonth(now.getMonth() + 1);
-      }
-
-      const difference = targetDate.getTime() - now.getTime();
-      setTimeLeft(Math.floor(difference / 1000));
-    };
-
-    calculateTimeLeft();
-  }, [entitlementInfo]);
-
-  useEffect(() => {
-    if (entitlementInfo) {
-      navigation?.goBack();
-    }
-  }, [entitlementInfo]);
+  const deviceId = useSelector((state) => state.user.deviceId);
 
   const handleCheckboxPress = (item) => {
     setSelectedItem(item.id === selectedItem?.id ? null : item);
   };
-  const deviceId = useSelector((state) => state.user.deviceId);
 
   const handleButtonPress = async () => {
     if (selectedItem) {
@@ -172,14 +131,14 @@ const Payment = ({ navigation }) => {
       </View>
       <View style={styles.content}>
         <ReusableText
-          text={entitlementInfo?.isActive ? t("payment.headerTitleSuccess") : t("payment.headerTitle")}
+          text={t("payment.headerTitle")}
           family={"bold"}
           size={TEXT.large}
           color={COLORS.lightBlack}
           align={"center"}
         />
         <ReusableText
-          text={entitlementInfo?.isActive ? t("payment.headerDescSuccess") : t("payment.headerDesc")}
+          text={t("payment.headerDesc")}
           family={"regular"}
           size={TEXT.small}
           color={COLORS.lightBlack}
@@ -189,7 +148,7 @@ const Payment = ({ navigation }) => {
           <Countdown
             until={timeLeft}
             size={25}
-            onFinish={() => alert(entitlementInfo?.isActive ? t("payment.campanyFinish") : t("payment.campanyFinish"))}
+            onFinish={() => alert(t("payment.campanyFinish"))}
             digitStyle={{ backgroundColor: COLORS.lightBlack }}
             digitTxtStyle={{ color: COLORS.primary }}
             timeLabelStyle={{ color: COLORS.lightBlack, fontWeight: "bold" }}

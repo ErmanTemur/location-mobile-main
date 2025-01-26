@@ -9,8 +9,8 @@ const Slides = ({ item }) => {
     <View style={styles.container}>
       <Image source={item.image} style={styles.image} />
       <View style={styles.columnGap}>
-          <ReusableText text={t(item.header)} family="bold" size={TEXT.large} color={COLORS.black} />
-          <ReusableText text={t(item.title)} family="medium" size={TEXT.small} color={COLORS.description} align="center" />
+          <ReusableText text={t(item.header)} family="bold" size={TEXT.xLarge} color={COLORS.black} />
+          <ReusableText text={t(item.title)} family="regular" size={TEXT.small} color={COLORS.description} align="center" />
         </View>
     </View>
   );
@@ -25,11 +25,9 @@ const styles = StyleSheet.create({
     width: SIZES.width,
   },
   image: {
-    width: 150,
-    height: 150,
+    width: 300,
+    height: 300,
     padding: 20,
-    backgroundColor: COLORS.lightInput,
-    borderRadius: 200,
     resizeMode: "contain",
   },
   stack: {

@@ -1,20 +1,18 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Payment, Settings } from "../screens";
-import { Ionicons } from "@expo/vector-icons";
+import { Home, Payment, Settings, Zone } from "../screens";
+import { Ionicons,  MaterialIcons,} from "@expo/vector-icons";
 import { COLORS } from "../constants/theme";
 import { useTranslation } from "react-i18next";
 
 const Tab = createBottomTabNavigator();
 
 const tabBarStyle = {
-  backgroundColor: "rgba(255, 255, 255, 0.8)",
+  backgroundColor: "rgba(255, 255, 255, 1)",
   paddingTop: 10,
-  paddingBottom: 10,
-  height: 60,
-  marginHorizontal: 20,
-  marginVertical: 15,
-  borderRadius: 50,
+  paddingBottom: 20,
+  height: 80,
+  marginBottom: 0,
   alignItems: "center",
   position: "absolute",
 };
@@ -25,10 +23,8 @@ const BottomTabNavigation = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      activeColor="#EB6A58"
       tabBarHideKeyBoard={true}
       headerShown={false}
-      inactiveColor="#3e2465"
       barStyle={{ paddingBottom: 48 }}
     >
       <Tab.Screen
@@ -36,7 +32,7 @@ const BottomTabNavigation = () => {
         component={Home}
         options={{
           tabBarStyle: tabBarStyle,
-          tabBarShowLabel: true,
+          tabBarShowLabel: false,
           tabBarLabel: t("home.location"),
           tabBarLabelStyle: {
             color: COLORS.black,
@@ -45,9 +41,9 @@ const BottomTabNavigation = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Ionicons
-              name={focused ? "map" : "map-outline"}
+              name={focused ? "location-sharp" : "location-outline"}
               color={focused ? COLORS.black : COLORS.black}
-              size={focused ? 22 : 20}
+              size={focused ? 28 : 26}
             />
           ),
         }}
@@ -60,11 +56,11 @@ const BottomTabNavigation = () => {
       />
       <Tab.Screen
         name="Payment"
-        component={Payment}
+        component={Zone}
         options={{
           tabBarStyle: tabBarStyle,
-          tabBarShowLabel: true,
-          tabBarLabel:  t("home.premium"),
+          tabBarShowLabel: false,
+          tabBarLabel: t("home.premium"),
           tabBarLabelStyle: {
             color: COLORS.black,
             fontSize: 12,
@@ -72,10 +68,31 @@ const BottomTabNavigation = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Ionicons
-              name={focused ? "journal" : "journal-outline"}
+              name={focused ? "person-add" : "person-add-outline"}
               color={focused ? COLORS.black : COLORS.black}
-              size={focused ? 22 : 20}
+              size={focused ? 28 : 26}
             />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Zone"
+        component={Zone}
+        options={{
+          tabBarStyle: tabBarStyle,
+          tabBarShowLabel: false,
+          tabBarLabel: t("home.settings"),
+          tabBarLabelStyle: {
+            color: COLORS.black,
+            fontSize: 12,
+          },
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+            name={focused ? "earth" : "earth-outline"}
+            color={focused ? COLORS.black : COLORS.black}
+            size={focused ? 28 : 26}
+          />
           ),
         }}
       />
@@ -84,8 +101,8 @@ const BottomTabNavigation = () => {
         component={Settings}
         options={{
           tabBarStyle: tabBarStyle,
-          tabBarShowLabel: true,
-          tabBarLabel:  t("home.settings"),
+          tabBarShowLabel: false,
+          tabBarLabel: t("home.settings"),
           tabBarLabelStyle: {
             color: COLORS.black,
             fontSize: 12,
@@ -95,7 +112,7 @@ const BottomTabNavigation = () => {
             <Ionicons
               name={focused ? "settings" : "settings-outline"}
               color={focused ? COLORS.black : COLORS.black}
-              size={focused ? 22 : 20}
+              size={focused ? 28 : 26}
             />
           ),
         }}

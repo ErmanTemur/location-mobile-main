@@ -154,13 +154,11 @@ export default function Main() {
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
         <Stack.Group>
-          {isFirstLaunch && (
-            <Stack.Screen
+        <Stack.Screen
               name="Onboarding"
               component={Onboarding}
               options={{ headerShown: false }}
             />
-          )}
           <Stack.Screen
             name="BottomTabNavigation"
             component={BottomTabNavigation}

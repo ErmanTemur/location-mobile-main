@@ -368,23 +368,7 @@ const Home = () => {
         {markers}
         {circles}
       </MapView>
-      <HomeModal
-        isModalVisible={isModalVisible}
-        toggleModal={toggleModal}
-        followingLocations={[
-          {
-            id: user?._id,
-            currentLocation: location?.coords,
-            picture: user?.picture,
-            nickname: "Ben",
-            address,
-            logs: user?.logs,
-            visibility: user?.visibility,
-          },
-          ...followingLocationsWithAddress,
-        ]}
-        onLocationSelect={handleGoToLocation}
-      />
+
       {!isModalVisible && (
         <TouchableOpacity
           onPress={toggleModal}

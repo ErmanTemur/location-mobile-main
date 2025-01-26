@@ -5,7 +5,6 @@ import { COLORS, SIZES, TEXT } from "../../constants/theme";
 import HomeCard from "../../components/Card/homeCard";
 import homeStyles from "../../screens/screens.style";
 import { BlurView } from "expo-blur";
-import { useRevenueCatContext } from "../../context/SubscriptionCtx";
 import LocationAddModal from "./LocationAddModal";
 import { Ionicons } from "@expo/vector-icons";
 import ReusableText from "./ReusableText";
@@ -17,7 +16,6 @@ const HomeModal = ({
   followingLocations,
   onLocationSelect,
 }) => {
-  const { entitlementInfo } = useRevenueCatContext();
   const [isAddModalVisible, setAddModalVisible] = useState(false);
   const openAddModal = () => setAddModalVisible(true);
   const closeAddModal = () => setAddModalVisible(false);
@@ -44,8 +42,6 @@ const HomeModal = ({
   const data =
     followingLocations && followingLocations.length > 1
       ? followingLocations
-      : entitlementInfo && entitlementInfo.isActive
-      ? []
       : defaultData;
 
   const renderItem = ({ item }) => (
@@ -109,27 +105,6 @@ const HomeModal = ({
                 }}
               />
             ))}
-          {entitlementInfo && entitlementInfo.isActive && data.length === 0 && (
-            <TouchableOpacity
-              onPress={openAddModal}
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: SIZES.small,
-                padding: SIZES.medium,
-              }}
-            >
-              <Ionicons name="person-add" size={24} color={COLORS.lightBlack} />
-              <ReusableText
-                text={t("home.personAdd")}
-                family={"medium"}
-                size={TEXT.small}
-                color={COLORS.lightBlack}
-                underline={true}
-              />
-            </TouchableOpacity>
-          )}
           <FlatList
             data={data}
             renderItem={renderItem}
