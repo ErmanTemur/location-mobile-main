@@ -20,7 +20,7 @@ const homeStyles = StyleSheet.create({
     margin: 0,
   },
   modalContent: {
-    backgroundColor: "rgba(173, 255, 47, 0.9)",
+    backgroundColor: "rgba(165, 53, 240, 0.3)",
     paddingHorizontal: 20,
     paddingBottom: 20,
     borderTopLeftRadius: 20,

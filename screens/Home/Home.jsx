@@ -347,7 +347,7 @@ const Home = () => {
         center={zone.coordinates}
         radius={zone.zoneRadius}
         strokeColor={COLORS.primary}
-        fillColor="rgba(173, 255, 47, 0.3)"
+        fillColor="rgba(165, 53, 240, 0.3)"
       />
     ));
   }, [zones]);
